@@ -36,10 +36,10 @@ let g:mapleader = " "
 let g:maplocalleader = ','
 
 "split navigations
-nnoremap <leader>j <C-W><C-J>
-nnoremap <leader>k <C-W><C-K>
-nnoremap <leader>l <C-W><C-L>
-nnoremap <leader>h <C-W><C-H>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " clear highlight
 nnoremap <leader>m :noh<return>
@@ -116,7 +116,7 @@ set mouse+=a
 set smartcase
 set ignorecase
 set wildmenu "graphical auto complete menu
-set lazyredraw "redraws the screne when it needs to
+"set lazyredraw "redraws the screne when it needs to
 set showmatch "highlights matching brackets
 set incsearch "search as characters are entered
 set hlsearch "highlights matching searches
