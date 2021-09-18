@@ -125,10 +125,8 @@ set hlsearch "highlights matching searches
 augroup compileandrun
     autocmd!
     autocmd filetype python nnoremap <f5> :w <bar> :!python3 % <cr>
-    autocmd filetype cpp nnoremap <f2> :w <bar> !g++ -std=c++17 % <cr>
-    autocmd filetype cpp nnoremap <f3> :vnew <bar> :te "a.exe" <cr>
-    autocmd filetype cpp nnoremap <f4> :w <bar> !g++ -std=c++17 % <cr> :vnew <bar> :te "a.exe" <cr>
-    autocmd filetype c nnoremap <f5> :w <bar> !make %:r && ./%:r <cr>
+	autocmd filetype cpp nnoremap <silent> <f4> :!g++ %<cr>
+	autocmd filetype cpp nnoremap <silent> <f5> :!g++ %<cr> :!start cmd /c a.exe ^& pause<cr><cr>
     autocmd filetype java nnoremap <f5> :w <bar> !javac % && java %:r <cr>
 augroup END
 
