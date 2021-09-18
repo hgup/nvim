@@ -1,5 +1,11 @@
-" PLUGINS ~/.config/nvim/plugged (or)
-" /user/<username>/appdata/local/nvim/plugged
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
+
+" PLUGINS 
+" ~/.config/nvim/plugged (UNIX)
+" /user/<username>/appdata/local/nvim/plugged (WINDOWS)
 call plug#begin(stdpath('config').'/plugged')
 
 "Looks
