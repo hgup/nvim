@@ -120,7 +120,7 @@ set wildmenu "graphical auto complete menu
 "set lazyredraw "redraws the screne when it needs to
 set showmatch "highlights matching brackets
 set incsearch "search as characters are entered
-set hlsearch "highlights matching searches
+set nohlsearch "remove highlight
 
 " run code
 augroup compileandrun
