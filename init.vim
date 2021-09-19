@@ -45,10 +45,6 @@ nnoremap <C-H> <C-W><C-H>
 nnoremap <leader>m :noh<return>
 nno <BS> :set hls!\|set hls?<CR>
 
-" moves current line down or up
-nnoremap <leader>- ddp
-nnoremap <leader>_ ddkP
-
 " init.vim quick edits
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
