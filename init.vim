@@ -63,6 +63,10 @@ nnoremap <buffer><localleader>w :set wrap!<cr>
 nnoremap <s-tab> :bp<return>
 nnoremap <tab> :bn<return>
 
+" save remaps
+nnoremap <leader>W :w !diff % -<cr>
+nnoremap <leader>w :w<cr>
+
 " primeagen remaps
 nnoremap Y y$
 nnoremap n nzzzv
