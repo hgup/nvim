@@ -55,9 +55,10 @@ nnoremap <leader>c :so $VIMRUNTIME/syntax/hitest.vim<return>
 " toggle wrap
 nnoremap <buffer><localleader>w :set wrap!<cr>
 
-" switch buffer
+" buffer settings
 nnoremap <s-tab> :bp<return>
 nnoremap <tab> :bn<return>
+nnoremap <silent><leader>d :bp\|bd #\|BarbarEnable<return>
 
 " save remaps
 nnoremap <leader>W :w !diff % -<cr>
