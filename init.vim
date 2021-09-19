@@ -117,6 +117,7 @@ set mouse+=a
 set smartcase
 set ignorecase
 set wildmenu "graphical auto complete menu
+
 "set lazyredraw "redraws the screne when it needs to
 set showmatch "highlights matching brackets
 set incsearch "search as characters are entered
@@ -131,6 +132,10 @@ augroup compileandrun
 	autocmd filetype cpp nnoremap <silent> <f5> :!g++ -O2 %<cr> :!start cmd /c a.exe ^& pause<cr><cr>
     autocmd filetype java nnoremap <f5> :w <bar> !javac % && java %:r <cr>
 augroup END
+
+"custom
+autocmd BufEnter * silent! lcd %:p:h
+
 
 " RICING
 
