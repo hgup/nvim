@@ -194,8 +194,8 @@ lua require('custom.lualine')
 
 " GITSIGNS
 lua require('gitsigns').setup()
-nnoremap <leader>gn :Gitsigns next_hunk<cr>
-nnoremap <leader>gp :Gitsigns prev_hunk<cr>
+nnoremap <leader>gn :Gitsigns next_hunk<cr>zzzv
+nnoremap <leader>gp :Gitsigns prev_hunk<cr>zzzv
 nnoremap <leader>gg :Gitsigns preview_hunk<cr>
 
 
