@@ -228,6 +228,7 @@ function! ToggleCursorLine()
 endfunction
  
 " BARBAR 
+let bufferline = get(g:, 'bufferline', {})
 " (compatibility with NVIM-TREE)
 let s:treeEnabled=0
 function! ToggleNvimTree()
@@ -239,7 +240,10 @@ function! ToggleNvimTree()
 			 let s:treeEnabled = 1
 	   endif
 endfunction
-nnoremap <leader>f :call ToggleNvimTree()<cr>
+nnoremap <silent><leader>f :call ToggleNvimTree()<cr>
+let bufferline.auto_hide = v:true
+let bufferline.animation = v:true
+let bufferline.no_name_title = "untitled"
 
 " QUICK SCOPE
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
