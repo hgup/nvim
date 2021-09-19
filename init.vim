@@ -16,6 +16,8 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'jiangmiao/auto-pairs'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'voldikss/vim-floaterm'
+Plug 'glepnir/dashboard-nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 "Hybrid
 Plug 'hoob3rt/lualine.nvim'
@@ -192,7 +194,28 @@ let g:neovide_floating_opacity = 0.9
 "VIM-FLOATERM
 let g:floaterm_keymap_toggle = '<F1>'
 
+" DASHBOARD
+let g:dashboard_default_executive ='telescope'
+let g:dashboard_custom_header = [
+						\'','','','',
+						\'HELLO HURSH', 
+						\'','','','',
+	 \] " Change to your name
 
+let g:dashboard_custom_shortcut={
+\ 'last_session'       : '      ',
+\ 'find_history'       : '      ',
+\ 'find_file'          : 'CTRL P',
+\ 'new_file'           : '      ',
+\ 'change_colorscheme' : '      ',
+\ 'find_word'          : '      ',
+\ 'book_marks'         : '      ',
+\ }
+
+" TELESCOPE
+nnoremap <silent><C-P> :Telescope find_files<cr>
+
+"
 " --- HYBRID ---
 
 " LUALINE
