@@ -99,6 +99,8 @@ set nu
 set clipboard=unnamedplus " public copy/paste register
 set ruler
 set nowrap
+set whichwrap+=<,h "Cool cursor nextline wrapping settings
+set whichwrap+=>,l
 set showcmd
 set noswapfile " doesn't create swap files
 set noshowmode
