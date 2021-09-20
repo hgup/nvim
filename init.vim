@@ -18,6 +18,14 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'voldikss/vim-floaterm'
 Plug 'nvim-telescope/telescope.nvim'
 
+"Autocompletions
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+
 "Hybrid
 Plug 'hoob3rt/lualine.nvim'
 Plug 'lewis6991/gitsigns.nvim'
@@ -105,7 +113,6 @@ set showcmd
 set noswapfile " doesn't create swap files
 set noshowmode
 set shortmess+=c
-set omnifunc=syntaxcomplete#Complete
 set shell=cmd
 set hidden
 
@@ -213,6 +220,21 @@ nnoremap <silent><leader>gg :Gitsigns preview_hunk<cr>
 nnoremap <leader>gs :Gitsigns stage_hunk<cr>
 nnoremap <leader>gc :!git commit -m "
 
+" -- AUTOCOMPLETIONS --
+
+" LSP
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
+"nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> <A-n> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <silent> <A-p> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+
+" CMP
+lua require('plugins.cmp')
+autocmd FileType TelescopePrompt lua require('cmp').setup.buffer { enabled = false }
 
 " --- NAVIGATION ---
 
