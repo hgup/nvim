@@ -168,6 +168,7 @@ colorscheme onedarker
 " GUI SETTINGS
 
 " standard
+" https://github.com/ryanoasis/nerd-fonts/releases/laters/download/JetBrainsMono.zip
 set guifont=JetBrainsMono\ NF:h14
 set guioptions-=m
 set guioptions-=T
