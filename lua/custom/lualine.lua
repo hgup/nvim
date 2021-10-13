@@ -2,7 +2,7 @@ local lualine = require 'lualine'
 
 -- Color table for highlights
 local colors = {
-  bg = '#202328',
+  bg = '#33353f',
   fg = '#bbc2cf',
   yellow = '#ECBE7B',
   cyan = '#008080',
@@ -12,7 +12,8 @@ local colors = {
   violet = '#a9a1e1',
   magenta = '#c678dd',
   blue = '#51afef',
-  red = '#ec5f67'
+  red = '#ec5f67',
+  custom = '#c27ff7'
 }
 
 local conditions = {
@@ -72,7 +73,7 @@ end
 
 ins_left {
   function() return '▊' end,
-  color = {fg = colors.blue}, -- Sets highlighting of component
+  color = {fg = colors.red}, -- Sets highlighting of component
   left_padding = 0 -- We don't need space before this
 }
 
@@ -81,7 +82,7 @@ ins_left {
   function()
     -- auto change color according to neovims mode
     local mode_color = {
-      n = colors.red,
+      n = colors.custom,
       i = colors.green,
       v = colors.blue,
       [''] = colors.blue,
@@ -105,7 +106,7 @@ ins_left {
     vim.api.nvim_command(
         'hi! LualineMode guifg=' .. mode_color[vim.fn.mode()] .. " guibg=" ..
             colors.bg)
-    return ''
+    return ''
   end,
   color = "LualineMode",
   left_padding = 0
@@ -135,7 +136,7 @@ ins_left {
 ins_left {
   'filename',
   condition = conditions.buffer_not_empty,
-  color = {fg = colors.magenta, gui = 'bold'}
+  color = {fg = colors.blue, gui = 'bold'}
 }
 
 ins_left {'location'}
@@ -158,7 +159,7 @@ ins_left {function() return '%=' end}
 ins_left {
   -- Lsp server name .
   function()
-    local msg = 'No Active Lsp'
+    local msg = ' '
     local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
     local clients = vim.lsp.get_active_clients()
     if next(clients) == nil then return msg end
@@ -170,7 +171,7 @@ ins_left {
     end
     return msg
   end,
-  icon = '  ',
+  icon = '',
   color = {fg = '#ffffff', gui = 'none'},
   condition = conditions.hide_in_width
 }
@@ -209,7 +210,7 @@ ins_right {
 
 ins_right {
   function() return '▊' end,
-  color = {fg = colors.blue},
+  color = {fg = colors.red},
   right_padding = 0
 }
 

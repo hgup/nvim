@@ -1,44 +1,4 @@
-" Run PlugInstall if there are missing plugins
-autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-  \| PlugInstall --sync | source $MYVIMRC
-\| endif
-
-" PLUGINS 
-" ~/.config/nvim/plugged (UNIX)
-" /user/<username>/appdata/local/nvim/plugged (WINDOWS)
-call plug#begin(stdpath('config').'/plugged')
-
-"Looks
-Plug 'navarasu/onedark.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
-
-"Functional
-Plug 'jiangmiao/auto-pairs'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'voldikss/vim-floaterm'
-Plug 'nvim-telescope/telescope.nvim'
-
-"Autocompletions
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
-
-"Hybrid
-Plug 'hoob3rt/lualine.nvim'
-Plug 'lewis6991/gitsigns.nvim'
-
-"Navigation
-Plug 'kyazdani42/nvim-tree.lua'
-Plug 'romgrk/barbar.nvim'
-Plug 'unblevable/quick-scope'
-Plug 'justinmk/vim-sneak'
-
-call plug#end()
-
-" KEYBINDINGS
+lua require('plugins')
 
 " leaders
 let g:mapleader = " "
@@ -90,18 +50,10 @@ set splitright
 set foldmethod=indent
 set foldlevel=99
 
-" Code Editor settings
-au BufNewFile,BufRead *.py,*.java,*.cpp,*.c,*.cs,*.rkt,*.h,*.html
-    \ set softtabstop=4 |
-    \ set shiftwidth=4 |
-    \ set textwidth=120 |
-    \ set expandtab |
-    \ set autoindent |
-    \ set fileformat=unix |
 
 " Core settings
 filetype plugin on
-set tabstop=4
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 set encoding=utf-8
 syntax on
 set nu 
@@ -149,7 +101,7 @@ autocmd BufEnter * silent! lcd %:p:h
 
 
 " RICING
-
+"
 " true colours
 if !has('gui_running')
   set t_Co=256
@@ -161,10 +113,12 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
+" Default value: ['ctermbg']
+let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
+
 " colorscheme
 set background=dark
-colorscheme onedarker
-
+colorscheme sonokai
 
 " GUI SETTINGS
 if has("unix")
@@ -275,37 +229,24 @@ nnoremap <leader>gc :!git commit -m "
 " -- AUTOCOMPLETIONS --
 
 " LSP
-nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
-"nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> <A-n> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <silent> <A-p> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+lua require("plugins.lsp-config")
 
 " CMP
-lua require('plugins.cmp')
-autocmd FileType TelescopePrompt lua require('cmp').setup.buffer { enabled = false }
+"lua require('plugins.cmp')
+"autocmd FileType TelescopePrompt lua require('cmp').setup.buffer { enabled = false }
+
+" COMPE
+set completeopt=menuone,noselect
+lua require("plugins.compe")
+
+
 
 " --- NAVIGATION ---
 
 " NVIM TREE
 " lua settings
-lua <<EOF
-	   local tree_cb = require'nvim-tree.config'.nvim_tree_callback
-	   vim.g.nvim_tree_bindings = {
-	   { key = {"<CR>", "l", "<2-LeftMouse>"}, cb = tree_cb("edit") },
-	   { key = "h",                         cb = tree_cb("close_node") },
-}
-EOF
+lua require('plugins.nvim-tree')
 
-" global
-let g:nvim_tree_auto_close = 1
-let g:nvim_tree_hijack_cursor = 1
-let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ] "empty by default
-let g:nvim_tree_follow_update_path = 1 
-let g:nvim_tree_follow = 1
 " cursorline
 autocmd! BufEnter * call ToggleCursorLine()
 function! ToggleCursorLine()
@@ -317,22 +258,19 @@ function! ToggleCursorLine()
 endfunction
  
 " BARBAR 
-let bufferline = get(g:, 'bufferline', {})
+lua require('plugins.barbar')
 " (compatibility with NVIM-TREE)
 let s:treeEnabled=0
 function! ToggleNvimTree()
-	   if s:treeEnabled
-			 lua require('custom.tree').close()
-			 let s:treeEnabled = 0
-	   else
-			 lua require('custom.tree').open()
-			 let s:treeEnabled = 1
-	   endif
+    if s:treeEnabled
+        lua require('custom.tree').close()
+        let s:treeEnabled = 0
+    else
+        lua require('custom.tree').open()
+        let s:treeEnabled = 1
+    endif
 endfunction
 nnoremap <silent><leader>f :call ToggleNvimTree()<cr>
-let bufferline.auto_hide = v:true
-let bufferline.animation = v:true
-let bufferline.no_name_title = "untitled"
 
 " QUICK SCOPE
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
