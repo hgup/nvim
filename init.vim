@@ -198,7 +198,7 @@ let g:floaterm_keymap_toggle = '<F1>'
 let g:dashboard_default_executive ='telescope'
 let g:dashboard_custom_header = [
 						\'','','','',
-						\'HELLO HURSH', 
+						\'Welcome back Mate!', 
 						\'','','','',
 	 \] " Change to your name
 
@@ -234,20 +234,9 @@ nnoremap <leader>gc :!git commit -m "
 
 " NVIM TREE
 " lua settings
-lua <<EOF
-	   local tree_cb = require'nvim-tree.config'.nvim_tree_callback
-	   vim.g.nvim_tree_bindings = {
-	   { key = {"<CR>", "l", "<2-LeftMouse>"}, cb = tree_cb("edit") },
-	   { key = "h",                         cb = tree_cb("close_node") },
-}
-EOF
 
-" global
-let g:nvim_tree_auto_close = 1
-let g:nvim_tree_hijack_cursor = 1
-let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ] "empty by default
-let g:nvim_tree_follow_update_path = 1 
-let g:nvim_tree_follow = 1
+lua require('plugin-config/nvimTree')
+
 " cursorline
 autocmd! BufEnter * call ToggleCursorLine()
 function! ToggleCursorLine()
