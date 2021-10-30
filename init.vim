@@ -83,13 +83,8 @@ set foldmethod=indent
 set foldlevel=99
 
 " Code Editor settings
-au BufNewFile,BufRead *.py,*.java,*.cpp,*.c,*.cs,*.rkt,*.h,*.html
-    \ set softtabstop=4 |
-    \ set shiftwidth=4 |
-    \ set textwidth=120 |
-    \ set expandtab |
-    \ set autoindent |
-    \ set fileformat=unix |
+filetype plugin on
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 
 " Core settings
 filetype plugin on
