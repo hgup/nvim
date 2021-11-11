@@ -1,6 +1,6 @@
 # My nvim config
 
-**It's really FAST! (no kidding)**
+**It's FAST! (no kidding)**
 
 Quickly setup my exact neovim config without any compromises in a few easy steps.
 
