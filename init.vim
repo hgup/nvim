@@ -3,29 +3,21 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
 \| endif
 
-" PLUGINS 
-" ~/.config/nvim/plugged (UNIX)
-" /user/<username>/appdata/local/nvim/plugged (WINDOWS)
 call plug#begin(stdpath('config').'/plugged')
 
-"Looks
-Plug 'navarasu/onedark.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
+" Theme
+Plug 'overcache/NeoSolarized'
+Plug 'nikolvs/vim-sunbather'
 
 "Functional
 Plug 'jiangmiao/auto-pairs'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'voldikss/vim-floaterm'
-Plug 'glepnir/dashboard-nvim'
-Plug 'nvim-telescope/telescope.nvim'
 
 "Hybrid
 Plug 'hoob3rt/lualine.nvim'
-Plug 'lewis6991/gitsigns.nvim'
 
 "Navigation
 Plug 'kyazdani42/nvim-tree.lua'
-Plug 'romgrk/barbar.nvim'
 Plug 'unblevable/quick-scope'
 Plug 'justinmk/vim-sneak'
 
@@ -50,12 +42,6 @@ nno <BS> :set hls!\|set hls?<CR>
 " init.vim quick edits
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
-
-" show colors
-nnoremap <leader>c :so $VIMRUNTIME/syntax/hitest.vim<return>
-
-" toggle wrap
-nnoremap <buffer><localleader>w :set wrap!<cr>
 
 " buffer settings
 nnoremap <s-tab> :bp<return>
@@ -120,16 +106,6 @@ set showmatch "highlights matching brackets
 set incsearch "search as characters are entered
 set nohlsearch "remove highlight
 
-" run code
-augroup compileandrun
-    autocmd!
-    autocmd filetype python nnoremap <f5> :w <bar> :!python3 % <cr>
-	autocmd filetype cpp nnoremap <silent> <f3> :!g++ -O0 -fsyntax-only %<cr>
-	autocmd filetype cpp nnoremap <silent> <f4> :!start cmd /c a.exe ^& pause<cr><cr>
-	autocmd filetype cpp nnoremap <silent> <f5> :!g++ -O2 %<cr> :!start cmd /c a.exe ^& pause<cr><cr>
-    autocmd filetype java nnoremap <f5> :w <bar> !javac % && java %:r <cr>
-augroup END
-
 "custom
 autocmd BufEnter * silent! lcd %:p:h
 
@@ -149,81 +125,11 @@ endif
 
 " colorscheme
 set background=dark
-colorscheme onedarker
+colorscheme neosolarized
 
-
-" GUI SETTINGS
-
-" standard
-set guifont=JetBrainsMono\ NF:h14
-set guioptions-=m
-set guioptions-=T
-set guioptions-=r
-set guioptions-=L
-
-" neovide specific
-function Neovide_fullscreen()
-    if g:neovide_fullscreen == v:true
-        let g:neovide_fullscreen=v:false
-    else
-        let g:neovide_fullscreen=v:true
-    endif
-endfunction
-map <F11> :call Neovide_fullscreen()<cr>
-" Temperory till, neovide resolves the blur issues
-let g:neovide_window_floating_opacity = 0
-let g:neovide_floating_blur = 0
-let g:neovide_floating_opacity = 0.9
-
-" PLUGIN SETTINGS
-
-
-" --- LOOKS ---
-" NO-config: <colorscheme>, nvim-web-devicons
-
-
-" --- FUNCTIONAL ---
-
-" NO-config: auto-pairs, plenary
-
-"VIM-FLOATERM
-let g:floaterm_keymap_toggle = '<F1>'
-
-" DASHBOARD
-let g:dashboard_default_executive ='telescope'
-let g:dashboard_custom_header = [
-						\'','','','',
-						\'Welcome back Mate!', 
-						\'','','','',
-	 \] " Change to your name
-
-let g:dashboard_custom_shortcut={
-\ 'last_session'       : '      ',
-\ 'find_history'       : '      ',
-\ 'find_file'          : 'CTRL P',
-\ 'new_file'           : '      ',
-\ 'change_colorscheme' : '      ',
-\ 'find_word'          : '      ',
-\ 'book_marks'         : '      ',
-\ }
-
-" TELESCOPE
-nnoremap <silent><C-P> :Telescope find_files<cr>
-
-"
-" --- HYBRID ---
 
 " LUALINE
 lua require('custom.lualine')
-
-" GITSIGNS
-lua require('gitsigns').setup()
-nnoremap <silent><leader>gn :Gitsigns next_hunk<cr>zzzv
-nnoremap <silent><leader>gp :Gitsigns prev_hunk<cr>zzzv
-nnoremap <silent><leader>gg :Gitsigns preview_hunk<cr>
-nnoremap <leader>gs :Gitsigns stage_hunk<cr>
-nnoremap <leader>gc :!git commit -m "
-
 
 " --- NAVIGATION ---
 
@@ -231,6 +137,7 @@ nnoremap <leader>gc :!git commit -m "
 " lua settings
 
 lua require('plugin-config/nvimTree')
+nnoremap <silent><leader>f :NvimTreeToggle<cr>
 
 " cursorline
 autocmd! BufEnter * call ToggleCursorLine()
@@ -241,24 +148,6 @@ function! ToggleCursorLine()
         setlocal nocursorline
     endif
 endfunction
- 
-" BARBAR 
-let bufferline = get(g:, 'bufferline', {})
-" (compatibility with NVIM-TREE)
-let s:treeEnabled=0
-function! ToggleNvimTree()
-	   if s:treeEnabled
-			 lua require('custom.tree').close()
-			 let s:treeEnabled = 0
-	   else
-			 lua require('custom.tree').open()
-			 let s:treeEnabled = 1
-	   endif
-endfunction
-nnoremap <silent><leader>f :call ToggleNvimTree()<cr>
-let bufferline.auto_hide = v:true
-let bufferline.animation = v:true
-let bufferline.no_name_title = "untitled"
 
 " QUICK SCOPE
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
