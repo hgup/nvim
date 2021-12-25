@@ -9,7 +9,7 @@ require'nvim-tree'.setup {
     -- hijack netrw window on startup
     hijack_netrw        = true,
     -- open the tree when running this setup function
-    open_on_setup       = true,
+    open_on_setup       = false,
     -- will not open on setup if the filetype is in this list
     ignore_ft_on_setup  = {},
     -- closes neovim automatically when the tree is the last **WINDOW** in the view
