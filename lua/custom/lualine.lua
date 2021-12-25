@@ -106,7 +106,7 @@ ins_left {
     vim.api.nvim_command(
         'hi! LualineMode guifg=' .. mode_color[vim.fn.mode()] .. " guibg=" ..
             colors.bg)
-    return ''
+    return '﫭'
   end,
   color = "LualineMode",
   left_padding = 0
@@ -145,7 +145,7 @@ ins_left {'progress', color = {fg = colors.fg, gui = 'bold'}}
 
 ins_left {
   'diagnostics',
-  sources = {'nvim_lsp'},
+  sources = {'nvim_diagnostic'},
   symbols = {error = ' ', warn = ' ', info = ' '},
   color_error = colors.red,
   color_warn = colors.yellow,
