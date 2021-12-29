@@ -70,11 +70,10 @@ set foldlevel=99
 
 " Code Editor settings
 filetype plugin on
-set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+set tabstop=2 softtabstop=0 shiftwidth=2 expandtab
 
 " Core settings
 filetype plugin on
-set tabstop=4
 set encoding=utf-8
 syntax on
 set nu 
@@ -125,7 +124,7 @@ endif
 
 " colorscheme
 set background=dark
-colorscheme neosolarized
+colorscheme base16-nord
 
 
 " LUALINE
