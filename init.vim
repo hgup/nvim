@@ -21,6 +21,27 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'unblevable/quick-scope'
 Plug 'justinmk/vim-sneak'
 
+"Latex
+Plug 'sirver/ultisnips'
+    let g:UltiSnipsExpandTrigger = '<tab>'
+    let g:UltiSnipsJumpForwardTrigger = '<tab>'
+    let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+
+Plug 'lervag/vimtex'
+    let g:vimtex_view_method='general'
+    let g:vimtex_view_general_viewer = 'sumatrapdf'
+    let g:tex_flavor='latex'
+    let g:vimtex_quickfix_mode=0
+
+Plug 'KeitaNakamura/tex-conceal.vim'
+    set conceallevel=1
+    let g:tex_conceal='abdmg'
+    hi Conceal ctermbg=none
+
+setlocal spell
+set spelllang=en_us
+inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+
 call plug#end()
 
 " KEYBINDINGS
@@ -163,3 +184,11 @@ highlight SneakScope guifg=black guibg=#49A3ff ctermfg=red ctermbg=yellow gui=it
 " remap plugs for 
 map gS <Plug>Sneak_,
 map gs <Plug>Sneak_;
+
+" tex
+
+" This is necessary for VimTeX to load properly. The "indent" is optional.
+" Note that most plugin managers will do this automatically.
+filetype plugin indent on
+
+
